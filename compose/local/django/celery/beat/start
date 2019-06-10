@@ -4,5 +4,5 @@ set -o errexit
 set -o nounset
 
 
-rm -f './celerybeat.pid'
-celery -A cride.taskapp beat -l INFO
+mkdir -p /var/run/celery/
+celery -A cride.taskapp beat -l INFO -s /var/run/celery/beat-schedule
