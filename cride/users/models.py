@@ -28,7 +28,7 @@ class User(CRideModel, AbstractUser):
         message="Phone number must be entered in the format: +999999999. Up to 15 digits allowed."
     )
     phone_number = models.CharField(validators=[phone_regex], max_length=17)
-    zone = models.models.CharField('Zone where client\'s came from', max_length=50)
+    zone = models.CharField('Zone where client\'s came from', max_length=50)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
