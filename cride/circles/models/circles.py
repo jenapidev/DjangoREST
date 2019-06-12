@@ -29,10 +29,10 @@ class Circles(CRideModel):
     is_limited = models.BooleanField('limited', default=False, help_text='Limited circles can grow up to a limited number of members.')
     numbers_limit = models.IntegerField(default=0, help_text='if circle is limited, this will be the number of users con be added')
 
-    def __str__(self);
+    def __str__(self):
         """return circle name"""
         return self.name
 
     class Meta(CRideModel.Meta):
         """Meta class"""
-            ordering = ['-rides_taken', '-rides_offered']
+        ordering = ['-rides_taken', '-rides_offered']
