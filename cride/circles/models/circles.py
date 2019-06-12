@@ -7,7 +7,7 @@ from django.db import models
 from cride.utils.models import CRideModel
 
 
-class Circles(CRideModel):
+class Circle(CRideModel): 
     """circle model
     A circle is a private group where rides are taken and offered 
     To Join a circle you must have a unique invitation provided by an existing member
