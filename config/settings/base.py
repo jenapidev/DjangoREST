@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'cride.users.apps.UsersAppConfig',
+    'cride.circles.apps.CirclesAppConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -155,4 +156,3 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERYD_TASK_TIME_LIMIT = 5 * 60
 CELERYD_TASK_SOFT_TIME_LIMIT = 60
-
