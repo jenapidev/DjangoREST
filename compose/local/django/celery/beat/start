@@ -3,6 +3,5 @@
 set -o errexit
 set -o nounset
 
-rm celerybeat.pid
 mkdir -p /var/run/celery/
 celery -A cride.taskapp beat -l INFO -s /var/run/celery/beat-schedule
