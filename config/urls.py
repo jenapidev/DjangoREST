@@ -10,6 +10,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
 
     path('', include(('cride.circles.urls', 'circles'), namespace='circle')),
+    path('', include(('cride.users.urls', 'users'), namespace='users')),
 
 
 
