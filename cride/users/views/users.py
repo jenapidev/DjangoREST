@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 #serializers
+from cride.users.serializers.profiles import ProfileModelSerializer
 from cride.circles.serializers import CircleModelSerializer
 from cride.users.serializers import (UserLoginSerializer, UserSignupSerializer, UserModelSerializer, AccountVerificationSerializer)
 
@@ -22,7 +23,7 @@ from cride.users.models import User
 from cride.circles.models import Circle
 
 
-class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     """User view set.
     Signup, login and accoutn verifications"""
 
@@ -34,7 +35,7 @@ class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         """Asign permissions about user's actions"""
         if self.action in ['signup', 'login', 'verify']:
             permissions = [AllowAny]
-        elif self.action == 'update':
+        elif self.action in ['update', 'partial_update']:
             permissions = [IsAuthenticated, IsAccountOwner]
         else:
             permissions = [IsAuthenticated]
@@ -70,6 +71,23 @@ class UserViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         serializer.save()
         data = {'message': 'Congratulations... Now you can use your Comparte Ride account'}
         return Response(data, status=status.HTTP_200_OK)
+
+
+    @action(detail=True, methods=['put', 'patch'])
+    def profile(self, request, *args, **kwargs):
+        user = self.get_object()
+        profile = user.profile
+        partial = request.method == 'patch'
+        serializer = ProfileModelSerializer(
+            profile,
+            data=request.data,
+            partial=partial
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        data = UserModelSerializer(user).data
+        return Response(data)
+
 
     def retrieve(self, request, *args, **kwargs):
         response = super(UserViewSet, self).retrieve(request, *args, **kwargs)

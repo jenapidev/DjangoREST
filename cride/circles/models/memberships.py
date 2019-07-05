@@ -18,7 +18,7 @@ class Membership(CRideModel):
     is_admin = models.BooleanField('circle admin', default=False, help_text="circle admin can update data and manage it's membership")
 
     #invitation
-    used_invitation = models.PositiveSmallIntegerField(default=0)
+    used_invitations = models.PositiveSmallIntegerField(default=0)
     remaining_invitations = models.PositiveSmallIntegerField(default=0)
     invited_by = models.ForeignKey('users.User', null=True, on_delete=models.SET_NULL, related_name='invited_by')   
 

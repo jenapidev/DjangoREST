@@ -8,10 +8,13 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.conf import settings
 
-#django res framework
+#django rest framework
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
+
+#serializers
+from cride.users.serializers.profiles import ProfileModelSerializer
 
 #models
 from cride.users.models import User, Profile
@@ -24,6 +27,8 @@ from datetime import timedelta
 class UserModelSerializer(serializers.ModelSerializer):
     """User model serializer."""
 
+    profile = ProfileModelSerializer(read_only=True)
+
     class Meta:
         """Meta class."""
 
@@ -33,7 +38,8 @@ class UserModelSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
-            'phone_number'
+            'phone_number',
+            'profile'
         )
 
 class UserSignupSerializer(serializers.Serializer):
@@ -44,7 +50,7 @@ class UserSignupSerializer(serializers.Serializer):
     username = serializers.CharField(min_length=4, max_length=20, validators=[ UniqueValidator(queryset=User.objects.all())])
     #Phone number
     phone_regex = RegexValidator(
-        regex=r'\+?2?\d{9,15}$',
+        regex=r'\+?2?\d{7,15}$',
         message="Phone number must be entered in the format: +999999999. Up to 15 digits allowed."
     )
     phone_number = serializers.CharField(validators=[phone_regex], max_length=17, required=True)
