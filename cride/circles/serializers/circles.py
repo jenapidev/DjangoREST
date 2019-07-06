@@ -23,7 +23,7 @@ class CircleModelSerializer(serializers.ModelSerializer):
             'name', 'slug_name',
             'about', 'picture',
             'rides_offered', 'rides_taken',
-            'verified', 'is_public',
+            'verified', 'members', 'is_public',
             'is_limited', 'numbers_limit'
         )
         read_only_fields = (
