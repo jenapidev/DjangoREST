@@ -13,7 +13,6 @@ from cride.users.serializers.users import UserModelSerializer
 #Permissions
 from rest_framework.permissions import IsAuthenticated
 from cride.circles.permissions.memberships import IsActiveCircleMember
-from cride.circles.permissions.memberships import IsAdminOrMembershipOwner
 
 
 #Models
@@ -37,9 +36,7 @@ class MembershipViewSet(mixins.ListModelMixin,  mixins.RetrieveModelMixin, mixin
     
     def get_permissions(self):
         """Asign permissions based on actions"""
-        permissions = [IsAuthenticated, IsActiveCircleMember, IsAdminOrMembershipOwner]
-        """if self.action == 'invitations':
-            permissions.append(IsSelfMember)"""
+        permissions = [IsAuthenticated, IsActiveCircleMember]
         return [p() for p in permissions]
 
     
