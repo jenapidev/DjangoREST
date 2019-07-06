@@ -13,7 +13,7 @@ from cride.users.serializers.users import UserModelSerializer
 #Permissions
 from rest_framework.permissions import IsAuthenticated
 from cride.circles.permissions.memberships import IsActiveCircleMember
-from cride.circles.permissions.circles import IsAdminOrMembershipOwner
+from cride.circles.permissions.memberships import IsAdminOrMembershipOwner
 
 
 #Models
