@@ -10,6 +10,7 @@ from rest_framework import status
 #Serializers
 from cride.circles.serializers.memberships import MembershipModelSerializer
 from cride.circles.serializers.memberships import AddMemberSerializer
+from cride.users.serializers.users import UserModelSerializer
 
 #Permissions
 from rest_framework.permissions import IsAuthenticated
