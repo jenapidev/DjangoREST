@@ -14,7 +14,7 @@ class Ride(CRideModel):
 
     passengers = models.ManyToManyField('users.User', related_name='passengers')
 
-    availiable_seats = models.PositiveSmallIntegerField(default=1)
+    availiable_seats = models.PositiveSmallIntegerField()
     comments = models.TextField(blank=True)
 
     departure_location = models.CharField(max_length=255)
